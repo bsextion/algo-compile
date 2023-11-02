@@ -18,7 +18,7 @@ const Login: React.FC<LoginProps> = () => {
           name='email'
           id='email'
           className='border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white'
-        placeholder='name@company.com'
+          placeholder='name@company.com'
         />
       </div>
       <div>
@@ -33,8 +33,28 @@ const Login: React.FC<LoginProps> = () => {
           name='password'
           id='password'
           className='border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white'
-        placeholder=''
+          placeholder='********************************'
         />
+      </div>
+      <button
+        type='submit'
+        className='w-full text-white focus:ring-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s'
+      >
+        Login
+      </button>
+      <button className='flex w-full justify-end'>
+        <a
+          href='#'
+          className='text-sm block text-brand-orange hover:underline w-full text-right'
+        >
+          Forgot Password
+        </a>
+      </button>
+      <div className='text-sm font-medium text-gray-500'>
+        Not Registered? {"  "}
+        <a href='#' className='text-blue-700 hover:underline'>
+           Create Account
+        </a>
       </div>
     </form>
   );

@@ -32,23 +32,23 @@ const Login: React.FC<LoginProps> = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputs.email || !inputs.password) {
-      return alert('Please fill all the fields');
+
+      return toast.error('Please fill in empty fields', {position: 'top-center', autoClose: 3000})
     }
     try {
-      const user = signInWithEmailAndPassword(inputs.email, inputs.password);
+      const user = await signInWithEmailAndPassword(inputs.email, inputs.password);
       if (!user) {
         return;
       }
       router.push('/');
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, {position: 'top-center', autoClose: 3000})
     }
   };
 
   useEffect(() => {
     if (error) {
       toast.error(error.message, {position: 'top-center', autoClose: 3000})
-
     }
   }, [error]);
   return (

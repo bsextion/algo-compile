@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import { auth } from '@/firebase/firebase';
 import { set } from 'firebase/database';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
 
 type LoginProps = {};
 
@@ -46,7 +47,8 @@ const Login: React.FC<LoginProps> = () => {
 
   useEffect(() => {
     if (error) {
-      alert(error.message);
+      toast.error(error.message, {position: 'top-center', autoClose: 3000})
+
     }
   }, [error]);
   return (

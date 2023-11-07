@@ -13,6 +13,7 @@
     "@codemirror/lang-javascript": "^6.2.1",
     "@uiw/codemirror-theme-vscode": "^4.21.20",
     "@uiw/react-codemirror": "^4.21.20",
+    "assert": "^2.1.0",
     "firebase": "^10.5.2",
     "next": "14.0.0",
     "react": "^18",

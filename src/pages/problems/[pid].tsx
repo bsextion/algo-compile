@@ -1,6 +1,6 @@
 import Topbar from '@/components/Topbar/Topbar';
 import Workspace from '@/components/Workspace/Workspace';
-import { problems } from '.';
+import { problems } from '../../utils/problems';
 import { Problem } from '@/utils/problems/types/problem';
 
 type ProblemPageProps = {

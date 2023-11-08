@@ -58,7 +58,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                   <BsCheck2Circle />
                 </div>
                 <div className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px]  ml-4 text-lg transition-colors duration-200 text-dark-gray-6'>
-                  {liked && <AiFillLike className='text-dark-blue-s'/>} 
+                  {liked && <AiFillLike className='text-dark-blue-'/>} 
                   {!liked && <AiFillLike/>}       
                   <span className='text-xs'>{currentProblem.likes}</span>
                 </div>

@@ -2,8 +2,10 @@ import { authModalState } from '@/atoms/authModalAtom';
 import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase/firebase';
+import { auth, firestore } from '@/firebase/firebase';
 import { useRouter } from 'next/router';
+import { doc, setDoc } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 type SignupProps = {};
 
@@ -33,17 +35,34 @@ const Signup: React.FC<SignupProps> = () => {
       return alert('Please fill all the fields');
     }
     try {
+      toast.loading('Creating Account...', {
+        position: 'top-center',
+        toastId: 'loadingToast',
+      });
       const newUser = await createUserWithEmailAndPassword(
         inputs.email,
         inputs.password
       );
-      if (!newUser) {
-        return;
-      } else {
-        router.push('/');
-      }
+      if (!newUser) return;
+
+      const userData = {
+        uid: newUser.user.uid,
+        email: newUser.user.email,
+        displayName: inputs.displayName,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        likedProblems: [],
+        dislikedProblems: [],
+        solvedProblems: [],
+        starredProblems: [],
+      };
+
+      await setDoc(doc(firestore, 'users', newUser.user.uid), userData);
+      router.push('/');
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message, { position: 'top-center' });
+    } finally {
+      toast.dismiss('loadingToast');
     }
   };
 
@@ -109,7 +128,7 @@ const Signup: React.FC<SignupProps> = () => {
           type='submit'
           className='w-full text-white focus:ring-blue font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-brand-orange hover:bg-brand-orange-s'
         >
-          {loading ? "Registering..." : "Register"}
+          {loading ? 'Registering...' : 'Register'}
         </button>
         <div className='text-sm font-medium text-gray-500'>
           Already have a account? {'  '}
